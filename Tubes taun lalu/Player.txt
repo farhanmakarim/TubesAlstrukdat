@@ -1,0 +1,12 @@
+Habibi
+300
+0
+0
+EndPlayer
+
+Thareq
+300
+0
+0
+EndPlayer
+.
