@@ -1,20 +1,34 @@
 #ifndef GAME_H
 #define GAME_H
 
-//#include "queue.h"
-//#include "stackt.h"
+#include "mesinkata.h"
+#include "queue.h"
+#include "array.h"
+#include "stackt.h"
 #include "matriks.h"
 #include "point.h"
+#include "graph.h"
 //#include "bintree.h"
 #include "drawutils.h"
+#include "customer.h"
+#include "order.h"
+#include "item.h"
+#include "itemlocation.h"
 
 #include <string.h>
 
 #define MAX_STR_LEN 12
 #define MAX_MAPS 4
+#define MAX_ITEMS 16
+#define MAX_TABLES 9
 #define MAX_MAP_WIDTH 16
 #define MAX_MAP_HEIGHT 19
 #define PLAYER_SYMBOL 'P'
+
+char CC;
+boolean EOP;
+boolean EndKata;
+Kata CKata;
 
 typedef struct {
   char name[MAX_STR_LEN + 1];
@@ -23,23 +37,33 @@ typedef struct {
   int time;
   POINT player_pos;
   int current_map;
-  //Queue waiting_cust;
-  //Array order;
-  //Stack food_stack;
-  //Stack hand;
+  Queue waiting_cust;
+  Array order;
+  Stack food_stack;
+  Stack hand;
   MATRIKS map_tiles[MAX_MAPS];
-  //Graph map_conns;
-  //BinTree menu_tree;
+  ItemLocation item_locations[MAX_ITEMS];
+  Graph map_graph;
+  //BinTree recipe_tree;
+
+  MapLocation table_locations[MAX_TABLES];
 } 
 Game;
 
 void game_init(Game *game, const char *name);
 
-void game_load_from_file(Game *game, FILE *file);
+void game_load_from_file(Game *game, const char *filename);
 void game_init_draw(Game *game);
-void game_save_to_file(Game *game, FILE *file);
-boolean game_move_player(Game *game, int delta_x, int delta_y);
 void game_advance_time(Game *game);
+void game_save_to_file(Game *game, const char *filename);
+boolean game_move_player(Game *game, int delta_x, int delta_y);
+boolean game_take_order(Game *game);
+boolean game_put_food(Game *game);
+boolean game_take_item(Game *game);
+boolean game_clear_hand(Game *game);
+boolean game_clear_tray(Game *game);
+boolean game_place_customer(Game *game);
+boolean game_give_food(Game *game);
 
 #endif
 

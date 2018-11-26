@@ -1,6 +1,6 @@
 #include "drawutils.h"
 
-void draw_name(char *name) {
+void draw_name(const char *name) {
   mvprintw(1, 2, "            ");
   mvprintw(1, 2, "%s", name);
 }
@@ -20,31 +20,39 @@ void draw_time(int time) {
   mvprintw(1, 66, "%d", time);
 }
 
-void draw_waiting_cust_elem(int i, char *elem) {
-  mvprintw(4 + i, 2, "            ");
-  mvprintw(4 + i, 2, "%s", elem);
+void draw_waiting_cust_elem(int i, const char *elem) {
+  mvprintw(3 + i, 2, "            ");
+  mvprintw(3 + i, 2, "%s", elem);
 }
 
-void draw_order_elem(int i, char *elem) {
-  mvprintw(14 + i, 2, "            ");
-  mvprintw(14 + i, 2, "%s", elem);
+void draw_order_elem(int i, const char *elem) {
+  mvprintw(13 + i, 2, "            ");
+  mvprintw(13 + i, 2, "%s", elem);
 }
 
-void draw_food_stack_elem(int i, char *elem) {
-  mvprintw(4 + i, 66, "            ");
-  mvprintw(4 + i, 66, "%s", elem);
+void draw_food_stack_elem(int i, const char *elem) {
+  mvprintw(3 + i, 66, "            ");
+  mvprintw(3 + i, 66, "%s", elem);
 }
 
-void draw_hand_elem(int i, char *elem) {
-  mvprintw(14 + i, 66, "            ");
-  mvprintw(14 + i, 66, "%s", elem);
+void draw_hand_elem(int i, const char *elem) {
+  mvprintw(13 + i, 66, "            ");
+  mvprintw(13 + i, 66, "%s", elem);
 }
 
 void draw_map_tile(int y, int x, char tile) {
   mvaddch(2 + y, 14 + x * 3, tile);
 }
 
-void draw_static_elems(int h, int w) {  
+void clear_command() {
+  mvprintw(23, 11, "                                                                   ");
+  move(23, 11);
+}
+
+void draw_game_ui(int h, int w) {  
+  clear();
+  curs_set(1);
+  
   //borders
   mvhline(3 + h, 16, 0, w * 3);
   mvvline(3, 16 + w * 3, 0, h);
@@ -108,8 +116,21 @@ void draw_static_elems(int h, int w) {
   mvprintw(23, 2, "Command:");
 }
 
-void clear_command() {
-  mvprintw(23, 11, "                                                                   ");
-  move(23, 11);
+void draw_main_menu() {
+  clear();
+  curs_set(0);
 }
 
+void draw_main_menu_cursor(int i) {
+  
+}
+
+void draw_credits() {
+  clear();
+  curs_set(0);
+}
+
+void draw_recipe_tree() {
+  clear();
+  curs_set(0);
+}

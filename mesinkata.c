@@ -17,9 +17,9 @@ void IgnoreBlank(){
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */
 
-void STARTKATA(){
+void STARTKATA(const char *filename){
 	EndKata = false;
-	START();
+	START(filename);
 	IgnoreBlank();
 	ADVKATA();
 }
@@ -46,17 +46,18 @@ void ADVKATA(){
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 
 void SalinKata(){
-	int i = 1;
+	int i = 0;
 	
-	do{
+	while((CC!=BLANK)&&(CC!=MARK)&&(i<NMax)) {
 		CKata.TabKata[i] = CC;
 		
 		ADV();
-		i++;
+		++i;
 		
-	}while((CC!=BLANK)&&(CC!=MARK)&&(i<NMax));
+	}
+	CKata.TabKata[i] = '\0';
 	
-	CKata.Length = i-1;
+	CKata.Length = i;
 }
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata

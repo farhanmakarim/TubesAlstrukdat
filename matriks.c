@@ -13,9 +13,9 @@
 #define KolMax 100
 
 typedef int indeks{} /* indeks baris, kolom */
-/*typedef int ElType{} 
+/*typedef int MatrixElType{} 
 typedef struct { 
-	ElType Mem[BrsMax+1][KolMax+1]{}
+	MatrixElType Mem[BrsMax+1][KolMax+1]{}
     int NBrsEff{} /* banyaknya/ukuran baris yg terdefinisi */
 //	int NKolEff{} /* banyaknya/ukuran kolom yg terdefinisi */
 //} MATRIKS{} */
@@ -38,7 +38,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M){
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 
 /* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j){
+boolean MatrixIsIdxValid (int i, int j){
 	return ((i >= BrsMin && i <= BrsMax) && (j >= KolMin && j <= KolMax));
 }
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
@@ -60,12 +60,12 @@ indeks GetLastIdxKol (MATRIKS M){
 	return NKolEff(M);
 }
 /* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
+boolean MatrixIsIdxEff (MATRIKS M, indeks i, indeks j){
 	return ( ( i>= BrsMin) && (i <= NBrsEff(M)) && (j >= KolMin) && (j<= NKolEff(M)) );
 }
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
-ElType GetElmtDiagonal (MATRIKS M, indeks i){
-	return Elmt(M,i,i);
+MatrixElType GetElmtDiagonal (MATRIKS M, indeks i){
+	return MatrixElmt(M,i,i);
 }
 /* Mengirimkan elemen M(i,i) */
 
@@ -80,7 +80,7 @@ void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl){
 	{
 		for(j=KolMin;j<=NKolEff(MIn);j++)
 		{
-			Elmt(*MHsl,i,j) = Elmt(MIn,i,j);
+			MatrixElmt(*MHsl,i,j) = MatrixElmt(MIn,i,j);
 		}
 	}
 }
@@ -102,7 +102,7 @@ boolean EQMATRIKS (MATRIKS M1, MATRIKS M2){
         for (i = BrsMin; i <= NBrsEff(M1); i++){
             for (j = KolMin; j <= NKolEff(M1); j++){
 
-                if ( Elmt(M1, i, j) != Elmt(M2, i, j) ){
+                if ( MatrixElmt(M1, i, j) != MatrixElmt(M2, i, j) ){
                     return false;
                 }
             }
@@ -145,7 +145,7 @@ boolean IsSimetri (MATRIKS M){
     else {
         for (i = BrsMin; i <= NBrsEff(M); i++){
             for (j = KolMin; j <= NKolEff(M); j++){
-                if (Elmt(M, i, j) != Elmt(M, j, i)){
+                if (MatrixElmt(M, i, j) != MatrixElmt(M, j, i)){
                     return false;
                 }
             }
@@ -165,12 +165,12 @@ boolean IsSatuan (MATRIKS M){
         for (i = BrsMin; i <= NBrsEff(M); i++){
             for (j = KolMin; j <= NKolEff(M); j++){
                 if (i == j){
-                    if (Elmt(M, i, j) != 1 ){
+                    if (MatrixElmt(M, i, j) != 1 ){
                         return false;
                     }
                 }
                 else{
-                    if (Elmt(M, i, j) != 0 ){
+                    if (MatrixElmt(M, i, j) != 0 ){
                         return false;
                     }
                 }
@@ -190,7 +190,7 @@ boolean IsSparse (MATRIKS M){
 
     for (i = BrsMin; i <= NBrsEff(M); i++){
             for (j = KolMin; j <= NKolEff(M); j++){
-                if (Elmt(M, i, j) != 0){
+                if (MatrixElmt(M, i, j) != 0){
                     counter += 1;
                 }
             }
@@ -201,14 +201,14 @@ boolean IsSparse (MATRIKS M){
 /* I.S. M terdefinisi */
 /* F.S. M di-invers, yaitu setiap elemennya dinegasikan (dikalikan -1) */
 void Transpose (MATRIKS * M){
-	ElType temp;
+	MatrixElType temp;
     indeks i,j;
 
     for (i = BrsMin; i <= NBrsEff(*M); i++){
 		for (j = i; j <= NKolEff(*M); j++){
-			temp = Elmt(*M, i, j);
-			Elmt(*M, i, j) = Elmt(*M, j, i);
-			Elmt(*M, j, i) = temp;
+			temp = MatrixElmt(*M, i, j);
+			MatrixElmt(*M, i, j) = MatrixElmt(*M, j, i);
+			MatrixElmt(*M, j, i) = temp;
 		}
 	}
 }

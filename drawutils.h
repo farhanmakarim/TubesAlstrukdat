@@ -3,15 +3,19 @@
 
 #include <ncurses.h>
 
-void draw_name(char *name);
+void draw_name(const char *name);
 void draw_money(int money);
 void draw_life(int life);
-void draw_waiting_cust_elem(int i, char *elem);
-void draw_order_elem(int i, char *elem);
-void draw_food_stack_elem(int i, char *elem);
-void draw_hand_elem(int i, char *elem);
+void draw_waiting_cust_elem(int i, const char *elem);
+void draw_order_elem(int i, const char *elem);
+void draw_food_stack_elem(int i, const char *elem);
+void draw_hand_elem(int i, const char *elem);
 void draw_map_tile(int x, int y, char tile);
-void draw_static_elems(int h, int w);
 void clear_command();
+void draw_game_ui(int h, int w);
+void draw_main_menu();
+void draw_main_menu_cursor(int i);
+void draw_credits();
+void draw_recipe_tree();
 
 #endif

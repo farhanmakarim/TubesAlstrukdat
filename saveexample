@@ -1,0 +1,192 @@
+NAMA    name
+500     money
+3       life
+4       time
+4       playerpos x
+5       playerpos y
+0       current_map
+3       waiting_cust count
+2       waiting_cust 0 size
+30      waiting_cust 0 wait
+2       waiting_cust 1 size
+20      waiting_cust 1 wait
+4       waiting_cust 2 size
+10      waiting_cust 2 wait
+2       order count
+Burger  order 1 food
+2       order 1 table
+30      order 1 wait
+Hotdog  order 2 food
+3       order 2 table
+15      order 2 wait
+2       food_stack count
+Burger  food_stack 1
+Hotdog  food_stack 2
+4       hand count
+Patty   hand 1
+Roti    hand 2
+Garpu   hand 3
+Piring  hand 4
+4       map_tiles count
+8       map_tiles 1 Width
+8       map_tiles 1 height
+ X
+X1X  X2X
+ X  
+ 
+
+ x
+x3x  X4X
+ x
+8       map_tiles 2 height
+8       map_tiles 2 width
+ X
+X1X  X2X
+ X  
+ 
+
+ x
+x3x  X4X
+ x
+8       map_tiles 3 height
+8       map_tiles 3 width
+ X
+X1X  X2X
+ X  
+ 
+
+ x
+x3x  X4X
+ x
+8       map_tiles 4 height
+8       map_tiles 4 width
+M      T
+M
+M
+M
+M  MMM
+M
+M
+M  MMMMM
+4       map_graph count
+1       map_graph 1 src map
+5       map_graph 1 src x
+8       map_graph 1 src y
+E       map_graph 1 src dir
+2       map_graph 1 dst map
+2       map_graph 1 dst x
+1       map_graph 1 dst y
+W       map_graph 1 dst dir
+2       map_graph 2 src map
+8       map_graph 2 src x
+5       map_graph 2 src y
+S       map_graph 2 src dir
+3       map_graph 2 dst map
+1       map_graph 2 dst x
+5       map_graph 2 dst y
+N       map_graph 2 dst dir
+3       map_graph 3 src map
+2       map_graph 3 src x
+1       map_graph 3 src y
+W       map_graph 3 src dir
+4       map_graph 3 dst map
+5       map_graph 3 dst x
+8       map_graph 3 dst y
+E       map_graph 3 dst dir
+4       map_graph 4 src map
+1       map_graph 4 src x
+5       map_graph 4 src y
+N       map_graph 4 src dir
+1       map_graph 4 dst map
+8       map_graph 4 dst x
+5       map_graph 4 dst y
+S       map_graph 4 dst dir
+Piring  recipe_tree
+4
+1
+1
+Sendok
+4
+1
+2
+Garpu
+4
+1
+3
+EsKrim
+4
+1
+4
+Nasi
+4
+1
+5
+Roti
+4
+1
+6
+Spaghetti
+4
+1
+7
+Pisang
+4
+1
+8
+Stroberi
+4
+4
+5
+Telur
+4
+5
+5
+AyamGoreng
+4
+5
+6
+Patty
+4
+4
+8
+Sosis
+4
+5
+8
+Bolognese
+4
+6
+8
+Carbonara
+4
+7
+8
+BnanaSplit
+0
+0
+Sundae
+0
+0
+NsTelurDdr
+0
+0
+NsAyamGrng
+0
+0
+Burger
+0
+0
+HotDog
+0
+0
+Keju
+4
+8
+8
+0
+SpghtCarbo
+0
+0
+SpghtBolog
+0
+0

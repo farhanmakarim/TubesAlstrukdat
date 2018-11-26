@@ -1,10 +1,12 @@
 #include "game.h"
 
 int main() {
+  
   initscr();
   
   Game game;
-  game_init(&game, "<NAME>");
+  //game_init(&game, "<NAME>");
+  game_load_from_file(&game, "newgame.template");
   game_init_draw(&game);
   
   char input[68];
@@ -29,20 +31,28 @@ int main() {
       is_valid = game_move_player(&game, 1, 0);
     }
     else if (strcmp(input, "ORDER") == 0) {
+      is_valid = game_take_order(&game);
     }
     else if (strcmp(input, "PUT") == 0) {
+      is_valid = game_put_food(&game);
     }
     else if (strcmp(input, "TAKE") == 0) {
+      is_valid = game_take_item(&game);
     }
     else if (strcmp(input, "CH") == 0) {
+      is_valid = game_clear_hand(&game);
     }
     else if (strcmp(input, "CT") == 0) {
+      is_valid = game_clear_tray(&game);
     }
     else if (strcmp(input, "PLACE") == 0) {
+      is_valid = game_place_customer(&game);
     }
     else if (strcmp(input, "GIVE") == 0) {
+      is_valid = game_give_food(&game);
     }
     else if (strcmp(input, "RECIPE") == 0) {
+      is_valid = false;
     }
     else if (strcmp(input, "SAVE") == 0) {
     }

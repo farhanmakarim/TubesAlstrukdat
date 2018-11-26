@@ -2,19 +2,19 @@
 #include "queue.h"
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q){
+boolean QueueIsEmpty (Queue Q){
 	return ((Head(Q)==Nil) && (Tail(Q)==Nil));
 }
 /* Mengirim true jika Q kosong: lihat definisi di atas */
-boolean IsFull (Queue Q){
+boolean QueueIsFull (Queue Q){
 	int CountEl = (((Tail(Q)-Head(Q) + MaxEl(Q)) %MaxEl(Q))+ 1 );
 	
     return (CountEl == MaxEl(Q));
 }
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
-int NBElmt (Queue Q){
-	if(IsEmpty(Q))
+int QueueNBElmt (Queue Q){
+	if(QueueIsEmpty(Q))
 	{
 		return 0;
 	}
@@ -27,7 +27,7 @@ int NBElmt (Queue Q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateEmpty (Queue * Q, int Max){
+void QueueCreateEmpty (Queue * Q, int Max){
 	(*Q).T = (infotype *) malloc ((Max + 1) * sizeof(infotype));
     if ((*Q).T != NULL)
 	{
@@ -47,7 +47,7 @@ void CreateEmpty (Queue * Q, int Max){
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
-void DeAlokasi(Queue * Q){
+void QueueDeAlokasi(Queue * Q){
 	MaxEl(*Q) = 0;
 	free((*Q).T);
 }
@@ -56,8 +56,8 @@ void DeAlokasi(Queue * Q){
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Add (Queue * Q, infotype X){
-	if (IsEmpty(*Q))
+void QueueAdd (Queue * Q, infotype X){
+	if (QueueIsEmpty(*Q))
 	{
 		Head(*Q) = 1;
 		Tail(*Q) = 1;
@@ -71,7 +71,7 @@ void Add (Queue * Q, infotype X){
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
-void Del (Queue * Q, infotype * X){
+void QueueDel (Queue * Q, infotype * X){
 	*X = InfoHead(*Q);
 	if (NBElmt(*Q) == 1)
 	{
