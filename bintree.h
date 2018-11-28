@@ -1,7 +1,7 @@
 /* ADT Pohon Biner */
 /* Implementasi dengan menggunakan pointer */
-/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan
-   karena melibatkan modul list rekursif. */
+/* Penamaan type treeinfotype, type addrNode, dan beberapa fungsi disesuikan
+   karena melibatkan modul ListRek rekursif. */
 
 #ifndef _BINTREE_H_
 #define _BINTREE_H_
@@ -10,19 +10,19 @@
 #include "listrek.h"
 #include "boolean.h"
 
-/* #define Nil NULL */ /* konstanta Nil sesuai pada modul listrek */
+/* #define TreeNil NULL */ /* konstanta TreeNil sesuai pada modul listrek */
 
 /* *** Definisi Type Pohon Biner *** */
-/* typedef int infotype; */ /* type infotype sesuai pada modul listrek */
+/* typedef int treeinfotype; */ /* type treeinfotype sesuai pada modul listrek */
 typedef struct tNode *addrNode;
 typedef struct tNode {
-	infotype info;
+	treeinfotype info;
 	addrNode left;
 	addrNode right;
 } Node;
 
 /* Definisi PohonBiner : */
-/* Pohon Biner kosong : P = Nil */
+/* Pohon Biner kosong : P = TreeNil */
 typedef addrNode BinTree;
 
 /* *** PROTOTYPE *** */
@@ -33,20 +33,20 @@ typedef addrNode BinTree;
 #define Right(P) (P)->right
 
 /* *** Konstruktor *** */
-BinTree Tree (infotype Akar, BinTree L, BinTree R);
+BinTree Tree (treeinfotype Akar, BinTree L, BinTree R);
 /* Menghasilkan sebuah pohon biner dari A, L, dan R, jika alokasi berhasil */
-/* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
-void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P);
+/* Menghasilkan pohon kosong (TreeNil) jika alokasi gagal */
+void MakeTree (treeinfotype Akar, BinTree L, BinTree R, BinTree *P);
 /* I.S. Akar, L, R terdefinisi. P Sembarang */
 /* F.S. Membentuk pohon P dengan Akar(P)=Akar, Left(P)=L, dan Right(P)=R
-		jika alokasi berhasil. P = Nil jika alokasi gagal. */
+		jika alokasi berhasil. P = TreeNil jika alokasi gagal. */
 
 /* Manajemen Memory */
-addrNode AlokNode (infotype X);
+addrNode AlokNode (treeinfotype X);
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P,
-  maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
+/* Jika alokasi berhasil, maka addrNode tidak TreeNil, dan misalnya menghasilkan P,
+  maka Akar(P) = X, Left(P) = TreeNil, Right(P)=TreeNil */
+/* Jika alokasi gagal, mengirimkan TreeNil */
 void DealokNode (addrNode P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
@@ -112,11 +112,11 @@ A
 */
 
 /* *** Searching *** */
-boolean SearchTree (BinTree P, infotype X);
+boolean SearchTree (BinTree P, treeinfotype X);
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 
 /* *** Fungsi-Fungsi Lain *** */
-int NbElmt (BinTree P);
+int BinTreeNbElmt (BinTree P);
 /* Mengirimkan banyaknya elemen (node) pohon biner P */
 int NbDaun (BinTree P);
 /* Mengirimkan banyaknya daun (node) pohon biner P */
@@ -127,7 +127,7 @@ boolean IsSkewLeft (BinTree P);
 boolean IsSkewRight (BinTree P);
 /* Mengirimkan true jika P adalah pohon condong kanan */
 /* Pohon kosong adalah pohon condong kanan */
-int Level (BinTree P, infotype X);
+int Level (BinTree P, treeinfotype X);
 /* Mengirimkan level dari node X yang merupakan salah satu simpul dari pohon biner P.
    Akar(P) level-nya adalah 1. Pohon P tidak kosong. */
 int Tinggi (BinTree P);
@@ -135,37 +135,37 @@ int Tinggi (BinTree P);
    Mengirim "height" yaitu tinggi dari pohon */
 
 /* *** Operasi lain *** */
-void AddDaunTerkiri (BinTree *P, infotype X);
+void AddDaunTerkiri (BinTree *P, treeinfotype X);
 /* I.S. P boleh kosong */
 /* F.S. P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
-void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri);
+void AddDaun (BinTree *P, treeinfotype X, treeinfotype Y, boolean Kiri);
 /* I.S. P tidak kosong, X adalah salah satu daun Pohon Biner P */
 /* F.S. P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri = true), atau
         sebagai anak Kanan X (jika Kiri = false) */
 /*		Jika ada > 1 daun bernilai X, diambil daun yang paling kiri */
-void DelDaunTerkiri (BinTree *P, infotype *X);
+void DelDaunTerkiri (BinTree *P, treeinfotype *X);
 /* I.S. P tidak kosong */
 /* F.S. P dihapus daun terkirinya, dan didealokasi, dengan X adalah info yang semula
         disimpan pada daun terkiri yang dihapus */
-void DelDaun (BinTree *P, infotype X);
+void DelDaun (BinTree *P, treeinfotype X);
 /* I.S. P tidak kosong, minimum ada 1 daun bernilai X. */
 /* F.S. Semua daun bernilai X dihapus dari P. */
-List MakeListDaun (BinTree P);
-/* Jika P adalah pohon kosong, maka menghasilkan list kosong. */
-/* Jika P bukan pohon kosong: menghasilkan list yang elemennya adalah semua daun pohon P,
-   jika semua alokasi list berhasil.
-   Daun terkiri menjadi elemen pertama dari list, diikuti elemen kanannya, dst.
-   Menghasilkan list kosong jika ada alokasi yang gagal. */
-List MakeListPreorder (BinTree P);
-/* Jika P adalah pohon kosong, maka menghasilkan list kosong. */
-/* Jika P bukan pohon kosong: menghasilkan list yang elemennya adalah semua elemen pohon P
+ListRek MakeListDaun (BinTree P);
+/* Jika P adalah pohon kosong, maka menghasilkan ListRek kosong. */
+/* Jika P bukan pohon kosong: menghasilkan ListRek yang elemennya adalah semua daun pohon P,
+   jika semua alokasi ListRek berhasil.
+   Daun terkiri menjadi elemen pertama dari ListRek, diikuti elemen kanannya, dst.
+   Menghasilkan ListRek kosong jika ada alokasi yang gagal. */
+ListRek MakeListPreorder (BinTree P);
+/* Jika P adalah pohon kosong, maka menghasilkan ListRek kosong. */
+/* Jika P bukan pohon kosong: menghasilkan ListRek yang elemennya adalah semua elemen pohon P
    dengan urutan preorder, jika semua alokasi berhasil.
-   Menghasilkan list kosong jika ada alokasi yang gagal. */
-List MakeListLevel (BinTree P, int N);
-/* Jika P adalah pohon kosong, maka menghasilkan list kosong. */
-/* Jika P bukan pohon kosong: menghasilkan list yang elemennya adalah semua elemen pohon P
+   Menghasilkan ListRek kosong jika ada alokasi yang gagal. */
+ListRek MakeListLevel (BinTree P, int N);
+/* Jika P adalah pohon kosong, maka menghasilkan ListRek kosong. */
+/* Jika P bukan pohon kosong: menghasilkan ListRek yang elemennya adalah semua elemen pohon P
    yang levelnya=N, jika semua alokasi berhasil.
-   Elemen terkiri menjadi elemen pertama dari list, diikuti elemen kanannya, dst.
-   Menghasilkan list kosong jika ada alokasi yang gagal. */
+   Elemen terkiri menjadi elemen pertama dari ListRek, diikuti elemen kanannya, dst.
+   Menghasilkan ListRek kosong jika ada alokasi yang gagal. */
 
 #endif

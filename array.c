@@ -348,7 +348,12 @@ void DelEli (Array * T, IdxType i, ElType * X)
 /* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 /*          Kurangi elemen efektif tabel */
 {
-	
+	int j;
+	*X = T->TI[i];
+	--T->Neff;
+	for (; i <= T->Neff; ++i) {
+		T->TI[i] = T->TI[i + 1];
+	}
 }
 
 /* ********** TABEL DGN ELEMEN UNIK (SETIAP ELEMEN HANYA MUNCUL 1 KALI) ********** */

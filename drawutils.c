@@ -118,19 +118,49 @@ void draw_game_ui(int h, int w) {
 
 void draw_main_menu() {
   clear();
-  curs_set(0);
 }
 
 void draw_main_menu_cursor(int i) {
   
 }
 
-void draw_credits() {
+void draw_credits(int money, int time) {
   clear();
-  curs_set(0);
+  mvprintw(0, 0, "\
+  GAME OVER\n\
+  \n\
+  Final results\n\
+  Money: %d\n\
+  Time: %d\n\
+  \n\
+  \n\
+  CREDITS\n\
+  \n\
+  Developers\n\
+  Farhan Makarim        - 13515003\n\
+  Hafiz Maulana         - 13516138\n\
+  Dimas Aditia Pratikto - 13516153\n\
+  Willsen Sentosa       - 13517036\n\
+  Hamzah Chairil Salim  - 13517051\n\
+  \n\
+  \n\
+  Press any key to exit...", money, time);
 }
 
-void draw_recipe_tree() {
+int draw_recipe_tree_node(BinTree recipe_tree, int row, int col) {
+  if (recipe_tree != TreeNil) {
+    mvprintw(row + 2, col * 2, "%s", Akar(recipe_tree).name);
+    ++row;
+    row = draw_recipe_tree_node(Left(recipe_tree), row, col + 1);
+    row = draw_recipe_tree_node(Right(recipe_tree), row, col + 1);
+  }
+  return row; 
+}
+
+void draw_recipe_tree(BinTree recipe_tree) {
+  int row;
   clear();
-  curs_set(0);
+  mvprintw(0, 0, "RECIPE");
+  row = draw_recipe_tree_node(recipe_tree, 0, 0);
+  mvprintw(row + 3, 0, "Press any key to return...");
 }
